@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classroom - Virtual Classroom</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Socket.io Client Script -->
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body class="dashboard-body">
+
+    <!-- Header Navigation -->
+    <header class="dashboard-header">
+        <div class="container navbar">
+            <h1 class="logo" id="classNameTitle">Loading Class...</h1>
+            <div class="user-info">
+                <span id="userName">User</span>
+                <a href="dashboard.html" class="btn btn-secondary btn-sm">Back to Dashboard</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs (Scrollable on Mobile) -->
+    <div class="container class-tabs">
+        <button class="tab-btn active" onclick="switchTab('streamTab')">📢 Notice Board</button>
+        <button class="tab-btn" onclick="switchTab('liveTab')">📹 Live Class</button>
+        <button class="tab-btn" onclick="switchTab('assignmentsTab')">📚 Assignments</button>
+        <button class="tab-btn" onclick="switchTab('chatTab')">💬 Real-time Chat</button>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="container classroom-container">
+
+        <!-- 1. Stream / Notice Board Tab -->
+        <section id="streamTab" class="tab-content active-content">
+            <div class="card teacher-only" id="postNoticeCard">
+                <h3>Post a Notice</h3>
+                <form id="noticeForm">
+                    <div class="form-group">
+                        <textarea id="noticeContent" placeholder="Share something with your class..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm">Post Notice</button>
+                </form>
+            </div>
+
+            <div class="notice-list" id="noticeList">
+                <p class="empty-msg">No notices posted yet.</p>
+            </div>
+        </section>
+
+        <!-- 2. Live Class Tab -->
+        <section id="liveTab" class="tab-content">
+            <div class="card text-center" style="text-align: center;">
+                <h2>📹 Live Video Classroom</h2>
+                <p style="margin: 10px 0 20px 0; color: #64748b;">Click below to join or start the live video session.</p>
+                <button id="startLiveBtn" class="btn btn-primary" style="margin: 0 auto;">Join Live Video Class</button>
+            </div>
+            <!-- Responsive Container for Jitsi Video Call -->
+            <div id="jitsiContainer" style="width: 100%; min-height: 400px; max-height: 600px; display: none; margin-top: 20px; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"></div>
+        </section>
+
+        <!-- 3. Assignments Tab -->
+        <section id="assignmentsTab" class="tab-content">
+            <div class="card teacher-only" id="createAssignmentCard">
+                <h3>Create Assignment</h3>
+                <form id="assignmentForm">
+                    <div class="form-group">
+                        <label for="assignTitle">Title</label>
+                        <input type="text" id="assignTitle" placeholder="Assignment Title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="assignDesc">Instructions</label>
+                        <textarea id="assignDesc" placeholder="Instructions..." required style="width: 100%; height: 80px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; resize: none;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="assignDueDate">Due Date</label>
+                        <input type="date" id="assignDueDate" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm">Create Assignment</button>
+                </form>
+            </div>
+
+            <div class="assignment-list" id="assignmentList">
+                <p class="empty-msg">No assignments found.</p>
+            </div>
+        </section>
+
+        <!-- 4. Real-time Chat Tab -->
+        <section id="chatTab" class="tab-content">
+            <div class="chat-box">
+                <div class="chat-messages" id="chatMessages">
+                    <p class="empty-msg">Welcome to class chat! Say hello 👋</p>
+                </div>
+                <form id="chatForm" class="chat-input-area">
+                    <input type="text" id="chatMessageInput" placeholder="Type a message..." required autocomplete="off">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Jitsi Meet External API for Video Call -->
+    <script src="https://meet.jit.si/external_api.js"></script>
+    <script src="js/classroom.js"></script>
+</body>
+</html>

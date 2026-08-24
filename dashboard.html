@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Virtual Classroom</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dashboard-body">
+
+    <!-- Header Navigation -->
+    <header class="dashboard-header">
+        <div class="container navbar">
+            <h1 class="logo">V-Classroom</h1>
+            <div class="user-info">
+                <span id="userName">Welcome, User</span>
+                <span id="userRoleBadge" class="badge">Role</span>
+                <button id="logoutBtn" class="btn btn-secondary btn-sm">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Content -->
+    <main class="container dashboard-container">
+        
+        <!-- Action Section (Dynamic based on Role) -->
+        <section class="action-bar">
+            <h2>My Classrooms</h2>
+            <button id="openModalBtn" class="btn btn-primary">+ Action</button>
+        </section>
+
+        <!-- Classroom List Grid -->
+        <section class="classrooms-grid" id="classroomsList">
+            <!-- Classes will be loaded here dynamically using JS -->
+            <p class="empty-msg">No classrooms found. Create or join one to get started!</p>
+        </section>
+
+    </main>
+
+    <!-- Modal Form for Create / Join Class -->
+    <div id="classModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModalBtn">&times;</span>
+            <h3 id="modalTitle" style="margin-bottom: 20px; color: #2c3e50;">Class Action</h3>
+            <form id="classForm">
+                <div class="form-group" id="classNameGroup">
+                    <label for="className">Class Name</label>
+                    <input type="text" id="className" placeholder="e.g. Computer Science 101">
+                </div>
+                <div class="form-group" id="classCodeGroup">
+                    <label for="classCode">Class Code</label>
+                    <input type="text" id="classCode" placeholder="Enter class code to join">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" id="modalSubmitBtn">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
