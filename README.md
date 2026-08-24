@@ -98,7 +98,9 @@ virtual-classroom/
 ├── .gitignore               # Ignored files (node_modules, .env, uploads)
 └── package.json             # Project Dependencies and Scripts
 
-## 🗄️ Database Architecture (SQL)
+
+
+## Database Architecture (SQL)
 
 Run the following SQL queries in your MySQL Database (e.g., via phpMyAdmin, MAMP, or MySQL Workbench) to set up the schema:
 
