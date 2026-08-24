@@ -97,3 +97,74 @@ virtual-classroom/
 ├── .env                     # Environment Variables Configuration
 ├── .gitignore               # Ignored files (node_modules, .env, uploads)
 └── package.json             # Project Dependencies and Scripts
+
+## 🗄️ Database Architecture (SQL)
+
+Run the following SQL queries in your MySQL Database (e.g., via phpMyAdmin, MAMP, or MySQL Workbench) to set up the schema:
+
+```sql
+CREATE DATABASE IF NOT EXISTS virtual_classroom;
+USE virtual_classroom;
+
+-- 1. Users Table
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('teacher', 'student') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 2. Classrooms Table
+CREATE TABLE IF NOT EXISTS classrooms (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    class_name VARCHAR(255) NOT NULL,
+    class_code VARCHAR(50) UNIQUE NOT NULL,
+    teacher_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (teacher_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- 3. Classroom Enrollments (Students)
+CREATE TABLE IF NOT EXISTS class_members (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    class_id INT NOT NULL,
+    user_id INT NOT NULL,
+    joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (class_id) REFERENCES classrooms(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- 4. Notices Table
+CREATE TABLE IF NOT EXISTS notices (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    class_id INT NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (class_id) REFERENCES classrooms(id) ON DELETE CASCADE
+);
+
+-- 5. Assignments Table
+CREATE TABLE IF NOT EXISTS assignments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    class_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    due_date DATE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (class_id) REFERENCES classrooms(id) ON DELETE CASCADE
+);
+
+## Author
+
+* **Chinmoy Chakma**
+  * **Program:** B.Sc. in Computer Science & Engineering (CSE)
+  * **Institution:** Green University of Bangladesh
+  * **GitHub:** [@Ch1nmoy](https://github.com/Ch1nmoy)
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
