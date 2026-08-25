@@ -22,9 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".teacher-only").forEach(el => el.style.display = "none");
     }
 
-    // ==========================================
-    // 📢 NOTICE BOARD MANAGEMENT
-    // ==========================================
+    // NOTICE BOARD MANAGEMENT
     async function loadNotices() {
         try {
             const res = await fetch(`http://localhost:3000/api/notices/${classId}`);
@@ -42,8 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     <small style="color: #94a3b8; display: block; margin-top: 8px;">Posted on: ${new Date(n.created_at).toLocaleString()}</small>
                     ${user.role === 'teacher' ? `
                         <div style="margin-top: 10px; display: flex; gap: 8px;">
-                            <button onclick="editNotice('${n.id}', \`${n.content.replace(/`/g, '\\`').replace(/'/g, "\\'")}\`)" class="btn btn-secondary btn-sm">✏️ Edit</button>
-                            <button onclick="deleteNotice('${n.id}')" class="btn btn-secondary btn-sm" style="background: #ef4444; color: white;">🗑️ Delete</button>
+                            <button onclick="editNotice('${n.id}', \`${n.content.replace(/`/g, '\\`').replace(/'/g, "\\'")}\`)" class="btn btn-secondary btn-sm">Edit</button>
+                            <button onclick="deleteNotice('${n.id}')" class="btn btn-secondary btn-sm" style="background: #ef4444; color: white;">Delete</button>
                         </div>
                     ` : ''}
                 </div>
@@ -77,9 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     loadNotices();
 
-    // ==========================================
-    // 📚 ASSIGNMENT & SUBMISSIONS MANAGEMENT
-    // ==========================================
+    // ASSIGNMENT & SUBMISSIONS MANAGEMENT
     async function loadAssignments() {
         try {
             const res = await fetch(`http://localhost:3000/api/assignments/${classId}`);
@@ -107,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (isPastDue) {
                         studentSubmissionArea = `
                             <p style="color: #ef4444; font-weight: bold; background: #fee2e2; padding: 8px 12px; border-radius: 6px; display: inline-block;">
-                                🚫 Submission Closed! Due date has passed.
+                                Submission Closed! Due date has passed.
                             </p>`;
                     } else {
                         // Check if student already submitted a file
@@ -118,10 +114,10 @@ document.addEventListener("DOMContentLoaded", () => {
                             if (mySub && mySub.file_path) {
                                 studentSubmissionArea = `
                                     <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 10px 14px; border-radius: 6px; margin-top: 10px;">
-                                        <p style="color: #166534; font-weight: bold; margin-bottom: 5px;">✅ Status: Submitted</p>
+                                        <p style="color: #166534; font-weight: bold; margin-bottom: 5px;">Status: Submitted</p>
                                         <small style="color: #64748b; display: block; margin-bottom: 8px;">Submitted on: ${new Date(mySub.submitted_at).toLocaleString()}</small>
                                         <a href="http://localhost:3000/${mySub.file_path.replace(/\\/g, '/')}" target="_blank" style="color: #2563eb; font-weight: bold; font-size: 0.9rem;">
-                                            📄 View/Download My Submitted File
+                                            View/Download My Submitted File
                                         </a>
                                     </div>
                                 `;
@@ -129,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 studentSubmissionArea = `
                                     <form onsubmit="submitAssignment(event, ${a.id})" style="margin-top: 10px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
                                         <input type="file" id="file-${a.id}" required style="font-size: 0.9rem; padding: 5px;">
-                                        <button type="submit" class="btn btn-primary btn-sm">📁 Upload & Submit</button>
+                                        <button type="submit" class="btn btn-primary btn-sm">Upload & Submit</button>
                                     </form>
                                 `;
                             }
@@ -151,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         ${user.role === 'teacher' ? `
                             <div style="margin-top: 15px; border-top: 1px solid #e2e8f0; padding-top: 10px;">
-                                <button onclick="viewSubmissions(${a.id})" class="btn btn-secondary btn-sm">📄 View Student Submissions</button>
+                                <button onclick="viewSubmissions(${a.id})" class="btn btn-secondary btn-sm">View Student Submissions</button>
                                 <div id="submissions-container-${a.id}" style="margin-top: 10px; display: none;"></div>
                             </div>
                         ` : ''}
@@ -193,9 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     loadAssignments();
 
-    // ==========================================
-    // 💬 REAL-TIME CHAT SYSTEM (Socket.io)
-    // ==========================================
+    // REAL-TIME CHAT SYSTEM (Socket.io)
     const socket = io("http://localhost:3000");
 
     socket.emit("joinRoom", { classId: String(classId), userName: user.name });
@@ -227,9 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     });
 
-    // ==========================================
-    // 📹 LIVE VIDEO CLASS (Jitsi Integration)
-    // ==========================================
+    // LIVE VIDEO CLASS (Jitsi Integration)
     const startLiveBtn = document.getElementById("startLiveBtn");
     const jitsiContainer = document.getElementById("jitsiContainer");
 
@@ -253,10 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// ==========================================
 // GLOBAL FUNCTIONS
-// ==========================================
-
 // Teacher View Submissions Function
 window.viewSubmissions = async (assignmentId) => {
     const container = document.getElementById(`submissions-container-${assignmentId}`);
@@ -288,17 +277,17 @@ window.viewSubmissions = async (assignmentId) => {
                             ${submissions.map(sub => `
                                 <tr>
                                     <td style="padding: 8px; border: 1px solid #cbd5e1; font-weight: 600; color: #1e293b;">
-                                        👤 ${sub.student_name}
+                                        ${sub.student_name}
                                     </td>
                                     <td style="padding: 8px; border: 1px solid #cbd5e1; color: #64748b;">
-                                        ✉️ ${sub.student_email || 'N/A'}
+                                        ${sub.student_email || 'N/A'}
                                     </td>
                                     <td style="padding: 8px; border: 1px solid #cbd5e1; color: #475569;">
                                         ${new Date(sub.submitted_at).toLocaleString()}
                                     </td>
                                     <td style="padding: 8px; border: 1px solid #cbd5e1;">
                                         <a href="http://localhost:3000/${sub.file_path.replace(/\\/g, '/')}" target="_blank" style="color: #2563eb; font-weight: bold; text-decoration: none;">
-                                            📥 Download File
+                                            Download File
                                         </a>
                                     </td>
                                 </tr>
