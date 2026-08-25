@@ -6,7 +6,7 @@
 [![Socket.io](https://img.shields.io/badge/Socket.io-4.x-black.svg)](https://socket.io/)
 [![License](https://img.shields.io/badge/License-MIT-brightgreen.svg)](LICENSE)
 
-An interactive, full-stack real-time web application designed to bridge the gap between teachers and students. **Virtual Classroom** provides a seamless digital learning environment equipped with live video conferencing, instant real-time messaging, interactive notice boards, role-based authentication, and assignment management.
+An interactive, full-stack real-time web application designed to bridge the gap between teachers and students. **EduSync-Live** provides a seamless digital learning environment equipped with live video conferencing, instant real-time messaging, interactive notice boards, role-based authentication, and assignment management.
 
 ---
 
@@ -26,7 +26,7 @@ An interactive, full-stack real-time web application designed to bridge the gap 
 
 ## About the Project
 
-The **Virtual Classroom Management System** is built to simulate a physical classroom virtually. Teachers can create distinct classrooms, post announcements, assign homework, and conduct live video lectures. Students can join classes using unique class codes, view announcements, participate in live discussions via real-time chat, and join video sessions seamlessly.
+The **EduSync Live** is built to simulate a physical classroom virtually. Teachers can create distinct classrooms, post announcements, assign homework, and conduct live video lectures. Students can join classes using unique class codes, view announcements, participate in live discussions via real-time chat, and join video sessions seamlessly.
 
 ---
 
@@ -98,7 +98,7 @@ virtual-classroom/
 ├── .gitignore               # Ignored files (node_modules, .env, uploads)
 └── package.json             # Project Dependencies and Scripts
 
-
+```
 
 ## Database Architecture (SQL)
 
@@ -157,12 +157,13 @@ CREATE TABLE IF NOT EXISTS assignments (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (class_id) REFERENCES classrooms(id) ON DELETE CASCADE
 );
+```
 
 ## Author
 
 * **Chinmoy Chakma**
-  * **Program:** B.Sc. in Computer Science & Engineering (CSE)
-  * **Institution:** Green University of Bangladesh
+  * **Program:** M.Sc. in Computer Science & Engineering (CSE)
+  * **Institution:** Jahangirnagar University
   * **GitHub:** [@Ch1nmoy](https://github.com/Ch1nmoy)
 
 ---
