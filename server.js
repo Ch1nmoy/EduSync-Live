@@ -47,7 +47,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'virtual_classroom',
+    database: 'edusync_live',
     port: 8889
 });
 
@@ -99,9 +99,7 @@ db.connect((err) => {
 
 const JWT_SECRET = 'your_jwt_secret_key_123';
 
-// ==========================================
-// ⏰ AUTO-REMOVE EXPIRED SUBMISSIONS SYSTEM
-// ==========================================
+// AUTO-REMOVE EXPIRED SUBMISSIONS SYSTEM
 function cleanupExpiredSubmissions() {
     const expiredQuery = `
         SELECT s.id, s.file_path 
@@ -131,9 +129,7 @@ function cleanupExpiredSubmissions() {
 // Run cleanup every 1 hour
 setInterval(cleanupExpiredSubmissions, 3600000);
 
-// ==========================================
 // AUTHENTICATION ROUTES
-// ==========================================
 app.post('/api/signup', async (req, res) => {
     const { name, email, password, role } = req.body;
     if (!name || !email || !password || !role) return res.status(400).json({ message: 'Please fill in all fields.' });
@@ -163,9 +159,7 @@ app.post('/api/login', (req, res) => {
     });
 });
 
-// ==========================================
 // CLASSROOM MANAGEMENT ROUTES
-// ==========================================
 app.post('/api/classrooms/create', (req, res) => {
     const { name, teacher_id } = req.body;
     const code = Math.random().toString(36).substring(2, 8).toUpperCase();
@@ -201,9 +195,7 @@ app.get('/api/classrooms/user/:id/:role', (req, res) => {
     });
 });
 
-// ==========================================
 // NOTICE BOARD ROUTES
-// ==========================================
 app.post('/api/notices/create', (req, res) => {
     const { classroom_id, content } = req.body;
     db.query('INSERT INTO notices (classroom_id, content) VALUES (?, ?)', [classroom_id, content], (err) => {
@@ -233,9 +225,7 @@ app.delete('/api/notices/delete/:id', (req, res) => {
     });
 });
 
-// ==========================================
 // ASSIGNMENT & SUBMISSION ROUTES
-// ==========================================
 app.post('/api/assignments/create', (req, res) => {
     const { classroom_id, title, description, due_date } = req.body;
     db.query('INSERT INTO assignments (classroom_id, title, description, due_date) VALUES (?, ?, ?, ?)', [classroom_id, title, description, due_date], (err) => {
@@ -311,4 +301,4 @@ io.on('connection', (socket) => {
 });
 
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+server.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
