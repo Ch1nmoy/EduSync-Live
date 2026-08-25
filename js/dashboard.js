@@ -67,8 +67,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                     ${user.role === 'teacher' ? `
                         <div class="card-actions" style="margin-top: 12px; display: flex; gap: 8px;">
-                            <button onclick="editClass('${c.id}', '${c.name}', '${c.code}')" class="btn btn-secondary btn-sm">✏️ Edit</button>
-                            <button onclick="deleteClass('${c.id}')" class="btn btn-secondary btn-sm" style="background: #ef4444; color: white;">🗑️ Delete</button>
+                            <button onclick="editClass('${c.id}', '${c.name}', '${c.code}')" class="btn btn-secondary btn-sm">Edit</button>
+                            <button onclick="deleteClass('${c.id}')" class="btn btn-secondary btn-sm" style="background: #ef4444; color: white;">Delete</button>
                         </div>
                     ` : ''}
                 </div>
