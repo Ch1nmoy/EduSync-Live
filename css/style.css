@@ -1,6 +1,4 @@
-/* ==========================================
-   RESET & BASIC STYLES
-   ========================================== */
+/* RESET & BASIC STYLES */
 * {
     margin: 0;
     padding: 0;
@@ -29,9 +27,7 @@ ul {
     margin: 0 auto;
 }
 
-/* ==========================================
-   BUTTONS
-   ========================================== */
+/* BUTTONS */
 .btn {
     display: inline-block;
     padding: 10px 22px;
@@ -85,9 +81,7 @@ ul {
     margin-top: 10px;
 }
 
-/* ==========================================
-   HEADER / NAVBAR
-   ========================================== */
+/* HEADER / NAVBAR */
 header {
     background-color: #ffffff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
@@ -131,9 +125,7 @@ nav ul li a:hover {
     gap: 12px;
 }
 
-/* ==========================================
-   HERO SECTION
-   ========================================== */
+/* HERO SECTION */
 .hero {
     background: linear-gradient(135deg, #4a90e2, #50e3c2);
     color: #fff;
@@ -160,9 +152,7 @@ nav ul li a:hover {
     flex-wrap: wrap;
 }
 
-/* ==========================================
-   FEATURES SECTION
-   ========================================== */
+/* FEATURES SECTION */
 .features {
     padding: 60px 0;
     background-color: #f8f9fa;
@@ -226,9 +216,7 @@ nav ul li a:hover {
     font-size: 14px;
 }
 
-/* ==========================================
-   AUTHENTICATION PAGES (Login / Signup)
-   ========================================== */
+/* AUTHENTICATION PAGES (Login / Signup) */
 .auth-body {
     background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
     min-height: 100vh;
@@ -310,9 +298,7 @@ nav ul li a:hover {
     font-size: 13px;
 }
 
-/* ==========================================
-   FOOTER
-   ========================================== */
+/* FOOTER */
 footer {
     background-color: #2c3e50;
     color: #ecf0f1;
@@ -321,9 +307,7 @@ footer {
     font-size: 14px;
 }
 
-/* ==========================================
-   DASHBOARD STYLES
-   ========================================== */
+/* DASHBOARD STYLES */
 .dashboard-body {
     background-color: #f4f6f9;
 }
@@ -558,9 +542,7 @@ footer {
     outline: none;
 }
 
-/* ==========================================
-   📱 RESPONSIVE MEDIA QUERIES (MOBILE FIXES)
-   ========================================== */
+/* RESPONSIVE MEDIA QUERIES (MOBILE FIXES) */
 
 /* Tablet & Mobile Screens (Max width: 768px) */
 @media screen and (max-width: 768px) {
